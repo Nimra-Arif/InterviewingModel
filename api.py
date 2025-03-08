@@ -18,7 +18,7 @@ app = FastAPI()
 
 # Load Whisper model
 print("Loading Whisper model...")
-model = whisper.load_model("base")
+model = whisper.load_model("tiny")
 
 # Define the request body model
 class InterviewRequest(BaseModel):
