@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+speechrecognition
+pyttsx3
+numpy
+whisper
+ffmpeg
+pydantic
