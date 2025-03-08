@@ -3,6 +3,9 @@ uvicorn
 speechrecognition
 pyttsx3
 numpy
-whisper
-ffmpeg
+openai-whisper
 pydantic
+ffmpeg
+torch
+torchaudio
+
