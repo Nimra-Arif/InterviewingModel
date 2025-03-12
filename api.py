@@ -10,11 +10,24 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
 # Disable SSL verification (for downloading Whisper model)
 ssl._create_default_https_context = ssl._create_unverified_context
 
 # Initialize FastAPI app
 app = FastAPI()
+
+# Enable CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # Allow frontend origin
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 # Load Whisper model
 print("Loading Whisper model...")
@@ -24,11 +37,17 @@ model = whisper.load_model("base")
 class InterviewRequest(BaseModel):
     questions: List[str]
 
+
+
 # Function to conduct the interview
 def conduct_interview(questions):
     recognizer = sr.Recognizer()
     engine = pyttsx3.init()
-    engine.setProperty('rate', 150)  
+    engine.setProperty('rate', 170)  # Adjust speech rate
+
+    # Set a modern, natural-sounding voice
+    voice_id = "com.apple.eloquence.en-US.Reed"  # Choose from available voices
+    engine.setProperty('voice', voice_id)
 
     answers = {}
 
